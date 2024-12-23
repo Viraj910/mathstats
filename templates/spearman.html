@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spearman's Rank Correlation Coefficient Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Spearman's Rank Correlation Coefficient Calculator</h1>
+    <form method="POST">
+        <label for="choice">Choose the type of data:</label>
+        <select id="choice" name="choice" required>
+            <option value="1">Ranks are given</option>
+            <option value="2">Data is given</option>
+        </select>
+        <label for="xValues">Enter values for X (comma-separated):</label>
+        <input type="text" id="xValues" name="xValues" placeholder="e.g. 1, 2, 3" required>
+        
+        <label for="yValues">Enter values for Y (comma-separated):</label>
+        <input type="text" id="yValues" name="yValues" placeholder="e.g. 4, 5, 6" required>
+        
+        <button type="submit">Calculate</button>
+    </form>
+    
+    {% if result is not none %}
+        <div class="result">
+            Spearman's rank correlation coefficient (r) is: {{ result }}
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        {% if choice == 1 %}
+                            <th>d = X - Y</th>
+                            <th>D²</th>
+                        {% elif choice == 2 %}
+                            <th>Rank(X)</th>
+                            <th>Rank(Y)</th>
+                            <th>d = Rank(X) - Rank(Y)</th>
+                            <th>D²</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td></td>
+                        <td><strong>{{ totalD }}</strong></td>
+                        <td><strong>{{ totalD2 }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

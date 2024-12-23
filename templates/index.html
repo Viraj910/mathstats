@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Calculator Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card-body {
+            text-align: center;
+        }
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+        .card-text {
+            font-size: 16px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Correlation Calculator Menu</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Karl Pearson Correlation Calculator</h5>
+                        <p class="card-text">Calculate the Pearson correlation coefficient between two sets of data.</p>
+                        <a href="/pearson" class="btn btn-primary">Go to Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Spearman Rank Correlation Calculator</h5>
+                        <p class="card-text">Calculate the Spearman rank correlation coefficient between two sets of data.</p>
+                        <a href="/spearman" class="btn btn-secondary">Go to Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Linear Regression Calculator</h5>
+                        <p class="card-text">Perform linear regression analysis on two sets of data.</p>
+                        <a href="/linearreg" class="btn btn-success">Go to Calculator</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Curve Fitting Calculator</h5>
+                        <p class="card-text">Fit a curve to a set of data points using different methods.</p>
+                        <a href="/curvefitting" class="btn btn-info">Go to Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

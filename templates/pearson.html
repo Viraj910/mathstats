@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Coefficient Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .sum-row {
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e2f0d9;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+        }
+        .ads {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Correlation Coefficient Calculator</h1>
+
+        <form method="POST">
+            <label for="x">Enter data for X (comma-separated):</label>
+            <input type="text" id="x" name="x" required>
+            <label for="y">Enter data for Y (comma-separated):</label>
+            <input type="text" id="y" name="y" required>
+            <input type="submit" value="Calculate">
+        </form>
+
+        {% if pearson is not none %}
+            <div class="result">
+                <h2>Results:</h2>
+                <p>Pearson's correlation coefficient (r): <strong>{{ pearson }}</strong></p>
+                <h3>Step-by-Step Calculation:</h3>
+                <p>1. Number of data points (n): <strong>{{ n }}</strong></p>
+                <p>2. ΣX: <strong>{{ sum_x }}</strong></p>
+                <p>3. ΣY: <strong>{{ sum_y }}</strong></p>
+                <p >4. ΣXY: <strong>{{ sum_xy }}</strong></p>
+                <p>5. ΣX²: <strong>{{ sum_xs }}</strong></p>
+                <p>6. ΣY²: <strong>{{ sum_ys }}</strong></p>
+                <p>7. Substitute into the formula:</p>
+                <p>r = (n * ΣXY - ΣX * ΣY) / sqrt[(n * ΣX² - (ΣX)²) * (n * ΣY² - (ΣY)²)]</p>
+                <p>8. Final calculation: <strong>{{ pearson }}</strong></p>
+            </div>
+
+            <h2>Data Summary:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>XY</th>
+                        <th>X<sup>2</sup></th>
+                        <th>Y<sup>2</sup></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for xi, yi, xyi, xsi, ysi in data %}
+                        <tr>
+                            <td>{{ xi }}</td>
+                            <td>{{ yi }}</td>
+                            <td>{{ xyi }}</td>
+                            <td>{{ xsi }}</td>
+                            <td>{{ ysi }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr class="sum-row">
+                        <td>Σx = {{ sum_x }}</td>
+                        <td>Σy = {{ sum_y }}</td>
+                        <td>ΣXY = {{ sum_xy }}</td>
+                        <td>ΣX<sup>2</sup> = {{ sum_xs }}</td>
+                        <td>ΣY<sup>2</sup> = {{ sum_ys }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+        
+        <a href="/" class="btn">
+            <i class="fas fa-arrow-left"></i> Back to Menu
+        </a>
+    </div>
+</body>
+</html>

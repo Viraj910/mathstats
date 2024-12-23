@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .sum-row {
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e2f0d9;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+        }
+        .ads {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Linear Regression Calculator</h1>
+
+        <form method="POST">
+            <label for="xValues">Enter data for X (comma-separated):</label>
+            <input type="text" id="xValues" name="xValues" required>
+            <label for="yValues">Enter data for Y (comma-separated):</label>
+            <input type="text" id="yValues" name="yValues" required>
+            <input type="submit" value="Calculate">
+        </form>
+
+        {% if byx is not none %}
+            <div class="result">
+                <h2>Results:</h2>
+                <p>Regression coefficient (byx): <strong>{{ byx }}</strong></p>
+                <p>Regression coefficient (bxy): <strong>{{ bxy }}</strong></p>
+                <p>Correlation coefficient (r): <strong>{{ r }}</strong></p>
+            </div>
+
+            <h2>Data Summary:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>dX</th>
+                        <th>dY</th>
+                        <th>dX²</th>
+                        <th>dY²</th>
+                        <th>dXdY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for xi, yi, dxi, dyi, dx2i, dy2i, dxdyi in data %}
+                        <tr>
+                            <td>{{ xi }}</td>
+                            <td>{{ yi }}</td>
+                            <td>{{ dxi }}</td>
+                            <td>{{ dyi }}</td>
+                            <td>{{ dx2i }}</td>
+                            <td>{{ dy2i }}</td>
+                            <td>{{ dxdyi }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr class="sum-row">
+                        <td>ΣdX = {{ sdx }}</td>
+                        <td>ΣdY = {{ sdy }}</td>
+                        <td>ΣdX² = {{ sdx2 }}</td>
+                        <td>ΣdY² = {{ sdy2 }}</td>
+                        <td>ΣdXdY = {{ sdxdy }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+        
+        <a href="/" class="btn">
+            <i class="fas fa-arrow-left"></i> Back to Menu
+        </a>
+    </div>
+</body>
+</html>
